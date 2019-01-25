@@ -10,11 +10,23 @@ using System.Windows.Forms;
 
 namespace Albatros
 {
-    public partial class Form1 : Form
+    public partial class LoginForm : Form
     {
-        public Form1()
+        public LoginForm()
         {
             InitializeComponent();
+        }
+
+        private void loginBtn_Click(object sender, EventArgs e)
+        {
+            HomeMDI homepanel = new HomeMDI();
+            this.Hide();
+            homepanel.Show();
+        }
+
+        private void exitBtn_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
