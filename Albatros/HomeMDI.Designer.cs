@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.flightSchedule = new System.Windows.Forms.ToolStripMenuItem();
-            this.nouveauToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openScheduleBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.listeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reroutageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,25 +53,27 @@
             this.flightScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crewScheduleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aircraftFlightRecordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quiterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.seDeconnecterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.quitterLapplicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bunifuDragControl1 = new Bunifu.Framework.UI.BunifuDragControl(this.components);
+            this.bunifuDragControlOldy = new Bunifu.Framework.UI.BunifuDragControl(this.components);
             this.sizeMod = new System.Windows.Forms.Label();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.controlPanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.settingBtn = new System.Windows.Forms.Label();
+            this.uiMessageBox1 = new Albatros.UIMessageBox();
             this.menuStrip.SuspendLayout();
+            this.controlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
             // 
+            this.menuStrip.BackColor = System.Drawing.Color.White;
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.flightSchedule,
             this.crewSchedule,
             this.AFR,
             this.config,
-            this.statistiquesToolStripMenuItem,
-            this.quiterToolStripMenuItem});
+            this.statistiquesToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -85,7 +87,7 @@
             // flightSchedule
             // 
             this.flightSchedule.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nouveauToolStripMenuItem,
+            this.openScheduleBtn,
             this.listeToolStripMenuItem,
             this.reroutageToolStripMenuItem,
             this.modificationToolStripMenuItem});
@@ -95,11 +97,12 @@
             this.flightSchedule.Size = new System.Drawing.Size(115, 24);
             this.flightSchedule.Text = "&Flight Schedule";
             // 
-            // nouveauToolStripMenuItem
+            // openScheduleBtn
             // 
-            this.nouveauToolStripMenuItem.Name = "nouveauToolStripMenuItem";
-            this.nouveauToolStripMenuItem.Size = new System.Drawing.Size(159, 26);
-            this.nouveauToolStripMenuItem.Text = "Ouvrir";
+            this.openScheduleBtn.Name = "openScheduleBtn";
+            this.openScheduleBtn.Size = new System.Drawing.Size(159, 26);
+            this.openScheduleBtn.Text = "Ouvrir";
+            this.openScheduleBtn.Click += new System.EventHandler(this.openScheduleBtn_Click);
             // 
             // listeToolStripMenuItem
             // 
@@ -135,6 +138,7 @@
             this.nouveauToolStripMenuItem1.Name = "nouveauToolStripMenuItem1";
             this.nouveauToolStripMenuItem1.Size = new System.Drawing.Size(135, 26);
             this.nouveauToolStripMenuItem1.Text = "Ouvrir";
+            this.nouveauToolStripMenuItem1.Click += new System.EventHandler(this.nouveauToolStripMenuItem1_Click);
             // 
             // listeToolStripMenuItem1
             // 
@@ -251,35 +255,12 @@
             this.aircraftFlightRecordsToolStripMenuItem.Size = new System.Drawing.Size(217, 26);
             this.aircraftFlightRecordsToolStripMenuItem.Text = "Aircraft Flight Records";
             // 
-            // quiterToolStripMenuItem
+            // bunifuDragControlOldy
             // 
-            this.quiterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.seDeconnecterToolStripMenuItem,
-            this.quitterLapplicationToolStripMenuItem});
-            this.quiterToolStripMenuItem.Name = "quiterToolStripMenuItem";
-            this.quiterToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
-            this.quiterToolStripMenuItem.Text = "Quitter";
-            this.quiterToolStripMenuItem.Click += new System.EventHandler(this.quiterToolStripMenuItem_Click);
-            // 
-            // seDeconnecterToolStripMenuItem
-            // 
-            this.seDeconnecterToolStripMenuItem.Name = "seDeconnecterToolStripMenuItem";
-            this.seDeconnecterToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.seDeconnecterToolStripMenuItem.Text = "Se deconnecter";
-            // 
-            // quitterLapplicationToolStripMenuItem
-            // 
-            this.quitterLapplicationToolStripMenuItem.Name = "quitterLapplicationToolStripMenuItem";
-            this.quitterLapplicationToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
-            this.quitterLapplicationToolStripMenuItem.Text = "Quitter l\'application";
-            this.quitterLapplicationToolStripMenuItem.Click += new System.EventHandler(this.quitterLapplicationToolStripMenuItem_Click);
-            // 
-            // bunifuDragControl1
-            // 
-            this.bunifuDragControl1.Fixed = true;
-            this.bunifuDragControl1.Horizontal = true;
-            this.bunifuDragControl1.TargetControl = this.menuStrip;
-            this.bunifuDragControl1.Vertical = true;
+            this.bunifuDragControlOldy.Fixed = true;
+            this.bunifuDragControlOldy.Horizontal = true;
+            this.bunifuDragControlOldy.TargetControl = this.controlPanel;
+            this.bunifuDragControlOldy.Vertical = true;
             // 
             // sizeMod
             // 
@@ -300,14 +281,59 @@
             this.bunifuElipse1.ElipseRadius = 0;
             this.bunifuElipse1.TargetControl = this;
             // 
+            // controlPanel
+            // 
+            this.controlPanel.BackColor = System.Drawing.Color.White;
+            this.controlPanel.Controls.Add(this.settingBtn);
+            this.controlPanel.Controls.Add(this.label1);
+            this.controlPanel.Location = new System.Drawing.Point(555, 12);
+            this.controlPanel.Name = "controlPanel";
+            this.controlPanel.Size = new System.Drawing.Size(476, 26);
+            this.controlPanel.TabIndex = 4;
+            this.controlPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.controlPanel_MouseDown);
+            this.controlPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.controlPanel_MouseUp);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label1.Location = new System.Drawing.Point(428, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Quitter";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // settingBtn
+            // 
+            this.settingBtn.AutoSize = true;
+            this.settingBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.settingBtn.Location = new System.Drawing.Point(354, 0);
+            this.settingBtn.Name = "settingBtn";
+            this.settingBtn.Size = new System.Drawing.Size(74, 17);
+            this.settingBtn.TabIndex = 0;
+            this.settingBtn.Text = "Paramètres";
+            this.settingBtn.Click += new System.EventHandler(this.settingBtn_Click);
+            // 
+            // uiMessageBox1
+            // 
+            this.uiMessageBox1.BackColor = System.Drawing.Color.Black;
+            this.uiMessageBox1.Location = new System.Drawing.Point(279, 206);
+            this.uiMessageBox1.Name = "uiMessageBox1";
+            this.uiMessageBox1.Size = new System.Drawing.Size(469, 185);
+            this.uiMessageBox1.TabIndex = 5;
+            this.uiMessageBox1.Load += new System.EventHandler(this.uiMessageBox1_Load);
+            // 
             // HomeMDI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1030, 581);
-            this.Controls.Add(this.sizeMod);
+            this.Controls.Add(this.controlPanel);
+            this.Controls.Add(this.uiMessageBox1);
             this.Controls.Add(this.menuStrip);
+            this.Controls.Add(this.sizeMod);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Calibri", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -318,8 +344,12 @@
             this.Name = "HomeMDI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomeMDI";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HomeMDI_FormClosing);
+            this.Load += new System.EventHandler(this.HomeMDI_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            this.controlPanel.ResumeLayout(false);
+            this.controlPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -332,8 +362,8 @@
         private System.Windows.Forms.ToolStripMenuItem crewSchedule;
         private System.Windows.Forms.ToolStripMenuItem AFR;
         private System.Windows.Forms.ToolStripMenuItem config;
-        private Bunifu.Framework.UI.BunifuDragControl bunifuDragControl1;
-        private System.Windows.Forms.ToolStripMenuItem nouveauToolStripMenuItem;
+        private Bunifu.Framework.UI.BunifuDragControl bunifuDragControlOldy;
+        private System.Windows.Forms.ToolStripMenuItem openScheduleBtn;
         private System.Windows.Forms.ToolStripMenuItem listeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reroutageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificationToolStripMenuItem;
@@ -352,11 +382,12 @@
         private System.Windows.Forms.ToolStripMenuItem stationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem avionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem personnelNaviguantToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem quiterToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem seDeconnecterToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem quitterLapplicationToolStripMenuItem;
         private System.Windows.Forms.Label sizeMod;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
+        private System.Windows.Forms.Panel controlPanel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label settingBtn;
+        private UIMessageBox uiMessageBox1;
     }
 }
 

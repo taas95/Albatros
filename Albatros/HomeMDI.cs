@@ -16,11 +16,15 @@ namespace Albatros
         AfrForm afrForm = new AfrForm();
         StatisticsForm statisticsForm = new StatisticsForm();
         AlbatrosUi ui = new AlbatrosUi();
+        SchedulingForm schedulingForm = new SchedulingForm();
+        Settings Settings = new Settings();
 
         public HomeMDI()
         {
             InitializeComponent();
             this.SetStyle(ControlStyles.ResizeRedraw, true);
+            //afrForm.Show();
+            //uiMessageBox1.Hide();
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -217,6 +221,88 @@ namespace Albatros
         private void quitterLapplicationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void nouveauToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openScheduleBtn_Click(object sender, EventArgs e)
+        {
+            //schedulingForm.Show();
+            schedulingForm.MdiParent = this;
+            //try
+            //{
+            //    afrForm.BringToFront();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine(ex.Message);
+            //}
+            //finally
+            //{
+            //    afrForm.Show();
+            //}
+            ui.openChild(schedulingForm);
+            //schedulingForm.Dock = DockStyle.Top;
+
+        }
+
+        private void controlPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.Cursor = Cursors.SizeAll;
+        }
+
+        private void controlPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.Cursor = Cursors.Default;
+        }
+
+        private void CloseBtn_Click(object sender, EventArgs e)
+        {
+            uiMessageBox1.BringToFront();
+        }
+
+        private void HomeMDI_FormClosing(object sender, FormClosingEventArgs e)
+        {
+    //        const string message =
+    //"Are you sure that you would like to close the App?";
+    //        const string caption = "Form Closing";
+    //        var result = MessageBox.Show(message, caption,
+    //                                     MessageBoxButtons.YesNo,
+    //                                     MessageBoxIcon.Question);
+
+    //        // If the no button was pressed ...
+    //        if (result == DialogResult.No)
+    //        {
+    //            // cancel the closure of the form.
+    //            e.Cancel = true;
+    //        }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            uiMessageBox1.Show();
+        }
+
+        private void HomeMDI_Load(object sender, EventArgs e)
+        {
+            uiMessageBox1.Hide();
+            afrForm.MdiParent = this;
+            ui.openChild(afrForm);
+            afrForm.Dock = DockStyle.Fill;
+
+        }
+
+        private void settingBtn_Click(object sender, EventArgs e)
+        {
+            //Settings.Show();
+        }
+
+        private void uiMessageBox1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

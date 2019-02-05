@@ -18,7 +18,17 @@ namespace Albatros
                 //SetProcessDPIAware();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            if (Properties.Settings.Default.isFirstOpen == true)
+            {
+                SQLiteManager sQLiteManager = new SQLiteManager();
+                sQLiteManager.initDB();
+                Application.Run(new LoginForm());
+
+            }
+            else
+            {
+                Application.Run(new LoginForm());
+            }
         }
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]

@@ -28,5 +28,11 @@ namespace Albatros
         {
             Application.Exit();
         }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.isFirstOpen = false;
+            Properties.Settings.Default.Save();
+        }
     }
 }
